@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
@@ -43,6 +43,11 @@ async function run() {
             res.send(result);
         })
 
+        app.post("/featured-foods", async (req, res) => {
+            const addedFood = req.body;
+            const result = await foodsCollection.insertOne(addedFood);
+            res.send(result);
+          });
 
 
         // Send a ping to confirm a successful connection
